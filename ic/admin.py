@@ -2,7 +2,6 @@ from django.contrib import admin
 
 # from portal_ic - app
 from ic.models import  Tipo_Conteudo, Voluntario_ou_Associado, Tipo_Atividade, Agenda, Conteudo, Projeto, Area,Conscin, Fase
-#****************
 
 
 class AgendaInline(admin.TabularInline):
