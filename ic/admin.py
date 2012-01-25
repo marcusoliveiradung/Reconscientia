@@ -18,7 +18,7 @@ class Tipo_AtividadeAdmin(admin.ModelAdmin):
      model = Tipo_Atividade
      inlines = [AgendaInline]
      extra = 3
-#********************************
+
 class VoluntarioAdmin(admin.ModelAdmin):
      model= Voluntario_ou_Associado
      inline = [AgendaInline]
