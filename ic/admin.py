@@ -9,6 +9,15 @@ class AgendaInline(admin.TabularInline):
 #     ]
      model = Agenda
      extra = 4
+#**********************************
+class AgendaAdmin(admin.ModelAdmin):
+#     fieldsets = [
+#     (None,{'fields': ['descricao']}),
+#     ]
+     model = Agenda
+     inlines=[AgendaInline]
+     extra = 4
+#***********************
 class Tipo_AtividadeAdmin(admin.ModelAdmin):
 #    fieldsets = [ 
 #     ('Equipe', {'fields': ['equipe_atividade'], 'classes':['collapse']}),
@@ -16,27 +25,43 @@ class Tipo_AtividadeAdmin(admin.ModelAdmin):
      model = Tipo_Atividade
      inlines = [AgendaInline]
      extra = 3
-
+#***************************************************
 class VoluntarioAdmin(admin.ModelAdmin):
-     model= Voluntario_ou_Associado
+     #model= Voluntario_ou_Associado
      inline = [AgendaInline]
      extra = 10
 #***********************************
-#class AreaAdmin(admin.ModelAdmin):
+
+class Arealine(admin.TabularInline):
+     model = Area
+     extra = 4
+#***********************************
+
+#***********************************
+class AreaAdmin(admin.ModelAdmin):
 #     fieldsets = [ 
 #     ('IC', {'fields': ['ic'], }),
 #     ]
-#     model= Area
-#     extra=2
-     
+     model= Area
+     inlines= [Arealine]
+     extra=10
 #***********************************
 class FaseInline(admin.TabularInline):
      model = Fase
      extra = 4
-
+#***********************************
 class ProjetoAdmin(admin.ModelAdmin):
      model = Projeto
      inlines = [FaseInline]
+     extra = 3
+#*********************************************************
+class Projetoline(admin.TabularInline):
+     model = Projeto
+     extra = 3
+#******************************************
+class AreaProjetoAdmin(admin.ModelAdmin):
+     model = Area
+     inlines = [Projetoline]
      extra = 3
 #************************************
 class ConteudoInline(admin.TabularInline):
@@ -47,18 +72,20 @@ class Tipo_ConteudoAdmin(admin.ModelAdmin):
      model = Tipo_Conteudo
      inlines = [ConteudoInline]
      extra = 3
-
+#********************************
 #********************************
 admin.site.register(Conscin)
-admin.site.register(Voluntario_ou_Associado, VoluntarioAdmin)
-admin.site.register(Area)#, AreaAdmin)
+admin.site.register(Voluntario_ou_Associado,VoluntarioAdmin)
+admin.site.register(Area, AreaAdmin)#,AreaAdmin,)
+#admin.site.register(AreaProjetoAdmin)
 admin.site.register(Tipo_Atividade,Tipo_AtividadeAdmin)
-admin.site.register(Agenda)
+admin.site.register(Agenda, AgendaAdmin)
 admin.site.register(Tipo_Conteudo,Tipo_ConteudoAdmin)
 admin.site.register(Conteudo)
-admin.site.register(Projeto, ProjetoAdmin)
+admin.site.register(Projeto, ProjetoAdmin)#,ProjetoAdmin)
 #admin.site.register(Fase)
 #********************************
+#Exs:
 #fieldsets = [
         #(None, {'fields': ['id']}),
         #('Artefato', {'fields': ['artefato']}),
