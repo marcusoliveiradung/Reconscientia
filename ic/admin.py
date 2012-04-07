@@ -1,3 +1,6 @@
+# _*_ coding: utf8 _*_
+
+
 from django.contrib import admin
 
 from ic.models.projetoatividade import Evento, TipoAtividade, Projeto,\
@@ -6,12 +9,24 @@ from ic.models.conscin import AssocConscin, Conscin, TipoAssocConscin
 from ic.models.conteudo import Conteudo, TipoConteudo
 from ic.models.base import Area
 
+#TIPOASSOCCONSCIN ADMIN
+class AssocConscinInline(admin.TabularInline):
+#     fieldsets = [
+#     (None,{'fields': ['descricao']}),
+#     ]
+    model = AssocConscin
+
+class TipoAssocConscinAdmin(admin.ModelAdmin):
+    model = TipoAssocConscin
+    inlines = [AssocConscinInline]
+    extra = 7
+
 class EventoInline(admin.TabularInline):
 #     fieldsets = [
 #     (None,{'fields': ['descricao']}),
 #     ]
     model = Evento
-    extra = 4
+
 #**********************************
 class EventoAdmin(admin.ModelAdmin):
 #     fieldsets = [
@@ -30,32 +45,27 @@ class TipoAtividadeAdmin(admin.ModelAdmin):
     inlines = [EventoInline]
     extra = 3
 
+class ParticipacaoInline(admin.StackedInline):
+    model = Participacao
+   
 
 class AssocConscinAdmin(admin.ModelAdmin):
     model = AssocConscin
-    inline = [AssocConscin]
-    extra = 10
-#***********************************
+    inlines = [ParticipacaoInline]
+    extra= 7 
 
 class Arealine(admin.TabularInline):
     model = Area
     extra = 4
 
-class AreaAdmin(admin.ModelAdmin):
-#     fieldsets = [ 
+class AreaAdmin(admin.ModelAdmin):#     fieldsets = [ 
 #     ('IC', {'fields': ['ic'], }),
 #     ]
     model = Area
     inlines = [Arealine]
     extra = 10
     
-class ParticipacaoInline(admin.StackedInline):
-    model = Participacao
-    extra = 10
 
-class ParticipacaoAdmin(admin.ModelAdmin):
-    model = AssocConscin
-    inlines = [ParticipacaoInline]
 
 
 class FaseInline(admin.TabularInline):
@@ -87,8 +97,8 @@ class TipoConteudoAdmin(admin.ModelAdmin):
     extra = 3
 
 admin.site.register(Conscin)
-admin.site.register(TipoAssocConscin)
-admin.site.register(AssocConscin, AssocConscinAdmin)
+admin.site.register(TipoAssocConscin, TipoAssocConscinAdmin)
+admin.site.register(AssocConscin, AssocConscinAdmin) 
 admin.site.register(Area, AreaAdmin)
 admin.site.register(TipoAtividade, TipoAtividadeAdmin)
 admin.site.register(FuncaoAtividade)

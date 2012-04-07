@@ -30,15 +30,15 @@ class TipoAssocConscin(models.Model):
 
 
 class AssocConscin(models.Model):
+    conscin =  models.ForeignKey(Conscin, blank='True', null='True')
     ind_tenepes = models.NullBooleanField()
     ind_docencia = models.NullBooleanField()
-    obs_docencia = models.TextField(blank='True')
-    conscin =  models.ForeignKey(Conscin, blank='True', null='True')
+    obs_docencia = models.TextField(blank='True')    
     tipo_assoc_conscin = models.ForeignKey(TipoAssocConscin)
     area_trabalho =  models.ManyToManyField(Area, blank='True', null='True')
 
     def __unicode__(self):
-        return self.conscin
+        return self.conscin.nome
 
     class Meta:
         app_label = 'ic'

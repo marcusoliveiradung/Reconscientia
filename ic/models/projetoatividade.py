@@ -39,9 +39,11 @@ class Projeto(models.Model):
     prioridade = models.IntegerField()
     area = models.ManyToManyField(Area, blank='True', null='True')
     tipo_atividade = models.ManyToManyField(TipoAtividade, blank='True', null='True')
-    
+
     def __unicode__(self):
         return self.nome
+
+
     class Meta:
         app_label = 'ic'
 
@@ -50,10 +52,11 @@ class FuncaoAtividade(models.Model):
     tipo_atividade = models.ForeignKey(TipoAtividade)
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
-    
+
     def __unicode__(self):
         return self.nome
     
+
     class Meta:
         app_label = 'ic'
 
@@ -109,7 +112,7 @@ class Participacao(models.Model):
     percentual_presenca = models.SmallIntegerField(blank=True, null=True)
     
     def __unicode__(self):
-        return self.evento
+        return self.evento.descricao
     
     class Meta:
         app_label = 'ic'
