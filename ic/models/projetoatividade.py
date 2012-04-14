@@ -1,9 +1,10 @@
 #-*- coding: utf-8 -*-
 
 from django.db import models
+
 from ic.models.base import Area
-from ic.models.conteudo import Conteudo
 from ic.models.conscin import AssocConscin
+from ic.models.conteudo import Conteudo 
 
 
 class TipoAtividade(models.Model):
@@ -83,19 +84,20 @@ class FaseProjeto(models.Model):
 class Evento(models.Model):
     """ Evento em si ou Ocorrencia da Atividade """
     
-    descricao = models.CharField(max_length=200) 
+    nome = models.CharField(max_length=200)
+    descricao = models.TextField(blank= 'True', null='True')
     inicio = models.DateTimeField('Inicio')
     fim = models.DateTimeField('Fim')
-    descricao = models.CharField(max_length=300)
     tipo_atividade = models.ForeignKey(TipoAtividade)
     atividade_projeto_sup = models.ForeignKey('self', blank= 'True', null='True') 
-    area = models.ManyToManyField(Area,blank= 'True', null='True')
+    area = models.ManyToManyField(Area, blank= 'True', null='True')
+    assoc_conscin = models.ManyToManyField(AssocConscin, through="Participacao") 
+    uso_artefato = models.ManyToManyField(Conteudo)#, through= "Utilizacao_Conteudo")  
     projeto = models.ManyToManyField(Projeto, blank= 'True', null='True')
-    assoc_conscin = models.ManyToManyField(AssocConscin, through="Participacao")  
-    producao = models.ManyToManyField(Conteudo, blank= 'True', null='True') #avaliar dependencia a Conteudo
+   # producao = models.ManyToManyField(Conteudo, blank= 'True', null='True') #avaliar dependencia a Conteudo
  
     def __unicode__(self):
-        return self.descricao
+        return self.nome
    
     class Meta:
         app_label = 'ic'
@@ -112,10 +114,20 @@ class Participacao(models.Model):
     percentual_presenca = models.SmallIntegerField(blank=True, null=True)
     
     def __unicode__(self):
-        return self.evento.descricao
+        return self.evento.nome
     
     class Meta:
         app_label = 'ic'
 
  
+#class Utilizacao_Conteudo(models.Model):
+#    conteudo = models.ForeignKey(Conteudo)    
+#    evento   = models.ForeignKey(Evento) 
+   ## descricao   = models.CharField(max_length=100)
     
+#    def __unicode__(self):
+#        return self.evento.nome + ' / ' + self.conteudo.nome   
+    
+#    class Meta:
+#        app_label = 'ic'
+ 

@@ -35,7 +35,8 @@ class AssocConscin(models.Model):
     ind_docencia = models.NullBooleanField()
     obs_docencia = models.TextField(blank='True')    
     tipo_assoc_conscin = models.ForeignKey(TipoAssocConscin)
-    area_trabalho =  models.ManyToManyField(Area, blank='True', null='True')
+    area_trabalho =  models.ManyToManyField(Area,through = "AssocConscin_Area",
+                                             blank='True', null='True')
 
     def __unicode__(self):
         return self.conscin.nome
@@ -44,12 +45,40 @@ class AssocConscin(models.Model):
         app_label = 'ic'
 
 
-#class VoluntarioInativo(models.Model):
-#    voluntario = models.ForeignKey(Voluntario)
+class AssocConscin_Area(models.Model):
+    assocconscin = models.ForeignKey(AssocConscin)
+    area = models.ForeignKey(Area)  
+     
+#    def __unicode__(self):
+#        return self.
+       
+    class Meta:
+        app_label = 'ic'
+        
+ 
+ 
+        
+        
+        
+
 #    data_desligamento = models.DateField()
 #    motivo_desligamento = models.TextField(Area, blank='True', null='True')
 #
 #    def __unicode__(self):
 #        return self.voluntario
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     
+

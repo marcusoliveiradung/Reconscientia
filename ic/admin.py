@@ -4,9 +4,9 @@
 from django.contrib import admin
 
 from ic.models.projetoatividade import Evento, TipoAtividade, Projeto,\
-    FaseProjeto, Participacao, FuncaoAtividade
-from ic.models.conscin import AssocConscin, Conscin, TipoAssocConscin
-from ic.models.conteudo import Conteudo, TipoConteudo
+     FaseProjeto, Participacao, FuncaoAtividade #, Utilizacao_Conteudo
+from ic.models.conscin import AssocConscin, Conscin, TipoAssocConscin, AssocConscin_Area
+from ic.models.conteudo import Conteudo, TipoConteudo #, Conteudo_Area
 from ic.models.base import Area
 
 #TIPOASSOCCONSCIN ADMIN
@@ -99,13 +99,16 @@ class TipoConteudoAdmin(admin.ModelAdmin):
 admin.site.register(Conscin)
 admin.site.register(TipoAssocConscin, TipoAssocConscinAdmin)
 admin.site.register(AssocConscin, AssocConscinAdmin) 
+admin.site.register(AssocConscin_Area) 
 admin.site.register(Area, AreaAdmin)
 admin.site.register(TipoAtividade, TipoAtividadeAdmin)
 admin.site.register(FuncaoAtividade)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(Participacao)
+#admin.site.register(Utilizacao_Conteudo)
 admin.site.register(TipoConteudo, TipoConteudoAdmin)
 admin.site.register(Conteudo)
+#admin.site.register(Conteudo_Area)
 admin.site.register(Projeto, ProjetoAdmin)
 
 #********************************
