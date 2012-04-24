@@ -3,8 +3,9 @@
 from django.db import models
 
 
-from ic.models.base import Area
-
+from ic.models.base import FuncaoAtividade
+from ic.models.emp import Area
+from ic.models.assoc_conscin import AssocConscin
 
 
 class TipoConteudo(models.Model):
@@ -29,7 +30,9 @@ class Conteudo(models.Model):
     nome = models.CharField(max_length=100) 
     descricao = models.CharField(max_length=200)
     artefato_area = models.ManyToManyField(Area,blank='True',null='True') #through="Conteudo_Area",
-                                                
+    funcaoatividade = models.ManyToManyField(FuncaoAtividade,blank='True',null='True')
+    assocconscin = models.ManyToManyField(AssocConscin,
+                                                        blank='True',null='True')                       
     #uso_artefato = models.ManyToManyField(Evento, through= "Utilizacao_Conteudo")    
     conteudo = models.FileField(upload_to = 'conteudo') #, blank= 'True', null='True')
     #FK ( Logica por enquanto para PFESSOA ou PESSOA/CONSCIN.VOLUNTARIO )
@@ -38,8 +41,21 @@ class Conteudo(models.Model):
 
     class Meta:
         app_label = 'ic'
-        
+   
+#class Conteudo_AssocConscin(models.Model):
+#    
+#    conteudo = models.ForeignKey(Conteudo)
+#    assocconscin = models.ForeignKey(AssocConscin)
+#    def __unicode__(self):
+#        return self.conteudo.nome
 
+#    class Meta:
+#        app_label = 'ic'
+       
+       
+       
+       
+       
 #class Conteudo_Area(models.Model):
 #    
 #    conteudo = models.ForeignKey(Conteudo,blank='True',null='True')
