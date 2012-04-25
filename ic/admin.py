@@ -4,7 +4,7 @@
 from django.contrib import admin
 
 from ic.models.conscin import  Conscin 
-from ic.models.base import  TipoAtividade, FuncaoAtividade
+from ic.models.base import  TipoAtividade, FuncaoAtividade, FormaPagto
 
 from ic.models.emp import Area
 from ic.models.assoc_conscin import TipoAssocConscin, AssocConscin #, AssocConscin_Area
@@ -109,6 +109,7 @@ admin.site.register(AssocConscin, AssocConscinAdmin)
 admin.site.register(Area, AreaAdmin)
 admin.site.register(TipoAtividade, TipoAtividadeAdmin)
 admin.site.register(FuncaoAtividade)
+admin.site.register(FormaPagto)
 admin.site.register(Evento, EventoAdmin)
 admin.site.register(Participacao)
 #admin.site.register(Utilizacao_Conteudo)

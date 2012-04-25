@@ -40,6 +40,15 @@ class FuncaoAtividade(models.Model):
     class Meta:
         app_label = 'ic'
 
+class FormaPagto(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField()
+
+    def __unicode__(self):
+        return self.nome
+    
+    class Meta:
+        app_label = 'ic'
 
 
 
