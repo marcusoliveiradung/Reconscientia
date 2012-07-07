@@ -62,7 +62,7 @@ class AssocConscinAdmin(admin.ModelAdmin):
 
 class Arealine(admin.TabularInline):
     model = Area
-    extra = 4
+    extra = 1
 
 class AreaAdmin(admin.ModelAdmin):#     fieldsets = [ 
 #     ('IC', {'fields': ['ic'], }),

@@ -10,8 +10,7 @@ class Area(models.Model):
     """
     nome = models.CharField(max_length=200)  
     descricao = models.TextField()   
-    area_sup= models.ForeignKey('self', related_name = 'area_sup_self', 
-                                blank= 'True', null='True')
+    area_sup= models.ForeignKey('self', verbose_name="Area superior", related_name = 'area_sup_self', blank= 'True', null='True')
     
     
     def __unicode__(self):
